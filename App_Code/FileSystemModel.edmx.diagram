@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ca505cb5301d4f9f8cdf370bc9c91571" Name="Diagram1" ZoomLevel="74">
+        <EntityTypeShape EntityType="FileSystemModel.Account" Width="1.5" PointX="2.375" PointY="3.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FileSystemModel.Courses" Width="1.5" PointX="12.125" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FileSystemModel.Files" Width="1.5" PointX="8.375" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FileSystemModel.FileWho" Width="1.5" PointX="12" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FileSystemModel.Major" Width="1.5" PointX="10.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="FileSystemModel.Section" Width="1.5" PointX="6.125" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="FileSystemModel.Student" Width="1.5" PointX="3.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="FileSystemModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FileSystemModel.Trainer" Width="1.5" PointX="4.25" PointY="3.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FileSystemModel.StudentSection" Width="1.5" PointX="10.125" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="FileSystemModel.FK__Student__Account__1273C1CD" ManuallyRouted="false" />
+        <AssociationConnector Association="FileSystemModel.FK__Trainer__Account__15502E78" ManuallyRouted="false" />
+        <AssociationConnector Association="FileSystemModel.FK__Courses__MajorID__1A14E395" ManuallyRouted="false" />
+        <AssociationConnector Association="FileSystemModel.FK__Section__CourseI__1DE57479" ManuallyRouted="false" />
+        <AssociationConnector Association="FileSystemModel.FK__Files__SectionID__239E4DCF" ManuallyRouted="false" />
+        <AssociationConnector Association="FileSystemModel.FK__FileWho__FileID__25869641" ManuallyRouted="false" />
+        <AssociationConnector Association="FileSystemModel.FK__FileWho__Student__267ABA7A" ManuallyRouted="false" />
+        <AssociationConnector Association="FileSystemModel.FK__Section__Trainer__1CF15040" ManuallyRouted="false" />
+        <AssociationConnector Association="FileSystemModel.FK__StudentSe__Secti__20C1E124" ManuallyRouted="false" />
+        <AssociationConnector Association="FileSystemModel.FK__StudentSe__Stude__1FCDBCEB" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

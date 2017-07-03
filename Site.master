@@ -1,0 +1,114 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Site.master.cs" Inherits="Site" %>
+
+
+<!DOCTYPE html>
+<html lang="en">
+  <head runat="server">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+      <link href="css/bootstrap.min.css" rel="stylesheet" />
+      <link href="css/bootstrap-theme.min.css" rel="stylesheet" />
+    <title> welcom ....</title>
+      
+    <asp:ContentPlaceHolder ID="cphHead" runat="server">
+        </asp:ContentPlaceHolder>
+   
+  </head>
+
+  <body>
+ <form id="form1" runat="server">
+    
+   
+
+  
+    <!-- Fixed navbar -->
+    <nav class="navbar navbar-default navbar-static-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar">
+            </span>
+          </button>
+
+              
+              
+        <!--  <a class="navbar-brand" href="#"> File Sharing</a>-->
+            <span style="margin-left:-90px;">  <img src="Contents/حسن.png"  height="58px"/></span>
+        </div>
+ 
+          <div id="navbar" class="navbar-collapse collapse" style="margin-left:90px;">
+          <ul class="nav navbar-nav">
+            
+              <a class="navbar-brand" href="#"> File Sharing</a>
+              <li class="active"><a href="homepage.aspx">Home</a></li>
+             <li><a href="aboutus.aspx">About</a></li> 
+              
+            
+    
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Action <span class="caret"></span></a>
+            
+                  <ul class="dropdown-menu">
+
+                <li><a href="<%=GetLink() %>">My Sections</a></li>
+               
+                <li role="separator" class="divider"></li>
+
+                <li><a href="<%=GetLinkEdit() %>">Edit Profile</a></li>
+
+               
+               
+               </ul>
+
+            </li>
+
+              </ul>
+
+            
+          <ul class="nav navbar-nav navbar-right">
+
+            <li>
+        
+                <h4>
+                    welcome 
+                    [
+                    <asp:Label CssClass="text-primary" ID="lblUserName" runat="server"  />
+                    ]
+                    
+                    <asp:LinkButton ID="lbLogin" runat="server" Text="logout" OnClick="lbLogin_Click"/>
+                    
+
+                </h4>
+            </li> 
+           </ul>
+        </div><!--/.nav-collapse -->
+    </div>
+    </nav>
+
+
+
+    <div class="container" style="margin-top:100px;">
+
+    <asp:ContentPlaceHolder ID="cphBody" runat="server">
+
+    </asp:ContentPlaceHolder>
+
+    </div>
+     
+     
+      <!-- /container -->
+    </form>
+
+    <script src="js/jquery.min.js"></script>
+      <script src="js/bootstrap.min.js"></script>
+</body>
+</html>
+

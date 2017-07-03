@@ -1,0 +1,747 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="FileSystemModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="UserType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="MajorID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SectionID" Type="int" Nullable="false" />
+          <Property Name="URL" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="DateAdded" Type="datetime" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="FileWho">
+          <Key>
+            <PropertyRef Name="FileID" />
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="FileID" Type="int" Nullable="false" />
+          <Property Name="StudentID" Type="int" Nullable="false" />
+          <Property Name="IsDownloaded" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Major">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TrainerID" Type="int" Nullable="false" />
+          <Property Name="CourseID" Type="int" Nullable="false" />
+          <Property Name="DateFrom" Type="date" Nullable="false" />
+          <Property Name="DateTo" Type="date" Nullable="false" />
+          <Property Name="TimeFrom" Type="time" Precision="7" Nullable="false" />
+          <Property Name="TimeTo" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Sunday" Type="bit" Nullable="false" />
+          <Property Name="Monday" Type="bit" Nullable="false" />
+          <Property Name="Tuesday" Type="bit" Nullable="false" />
+          <Property Name="Wednesday" Type="bit" Nullable="false" />
+          <Property Name="Thursday" Type="bit" Nullable="false" />
+          <Property Name="Friday" Type="bit" Nullable="false" />
+          <Property Name="Saturday" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'FileSystem.dbo.StudentSection' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="StudentSection">
+          <Key>
+            <PropertyRef Name="StudenID" />
+            <PropertyRef Name="SectionID" />
+            <PropertyRef Name="FirstMark" />
+            <PropertyRef Name="SecondMark" />
+            <PropertyRef Name="ParticipantionMark" />
+            <PropertyRef Name="FinalMark" />
+          </Key>
+          <Property Name="StudenID" Type="int" Nullable="false" />
+          <Property Name="SectionID" Type="int" Nullable="false" />
+          <Property Name="FirstMark" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="SecondMark" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="ParticipantionMark" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="FinalMark" Type="decimal" Precision="4" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Specialist" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="AccountID" Type="int" />
+        </EntityType>
+        <Association Name="FK__Courses__MajorID__1A14E395">
+          <End Role="Major" Type="Self.Major" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Major">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="MajorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Files__SectionID__239E4DCF">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FileWho__FileID__25869641">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="FileWho" Type="Self.FileWho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FileWho">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FileWho__Student__267ABA7A">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="FileWho" Type="Self.FileWho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FileWho">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Section__CourseI__1DE57479">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Section__Trainer__1CF15040">
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="TrainerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Student__Account__1273C1CD">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Secti__20C1E124">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="StudentSection" Type="Self.StudentSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="StudentSection">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Stude__1FCDBCEB">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentSection" Type="Self.StudentSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StudentSection">
+              <PropertyRef Name="StudenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trainer__Account__15502E78">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trainer">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FileSystemModelStoreContainer">
+          <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FileWho" EntityType="Self.FileWho" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Major" EntityType="Self.Major" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Section" EntityType="Self.Section" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Trainer" EntityType="Self.Trainer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="StudentSection" EntityType="Self.StudentSection" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [StudentSection].[StudenID] AS [StudenID], 
+    [StudentSection].[SectionID] AS [SectionID], 
+    [StudentSection].[FirstMark] AS [FirstMark], 
+    [StudentSection].[SecondMark] AS [SecondMark], 
+    [StudentSection].[ParticipantionMark] AS [ParticipantionMark], 
+    [StudentSection].[FinalMark] AS [FinalMark]
+    FROM [dbo].[StudentSection] AS [StudentSection]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK__Courses__MajorID__1A14E395" Association="Self.FK__Courses__MajorID__1A14E395">
+            <End Role="Major" EntitySet="Major" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Files__SectionID__239E4DCF" Association="Self.FK__Files__SectionID__239E4DCF">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FileWho__FileID__25869641" Association="Self.FK__FileWho__FileID__25869641">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="FileWho" EntitySet="FileWho" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FileWho__Student__267ABA7A" Association="Self.FK__FileWho__Student__267ABA7A">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="FileWho" EntitySet="FileWho" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Section__CourseI__1DE57479" Association="Self.FK__Section__CourseI__1DE57479">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Section__Trainer__1CF15040" Association="Self.FK__Section__Trainer__1CF15040">
+            <End Role="Trainer" EntitySet="Trainer" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Student__Account__1273C1CD" Association="Self.FK__Student__Account__1273C1CD">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Secti__20C1E124" Association="Self.FK__StudentSe__Secti__20C1E124">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="StudentSection" EntitySet="StudentSection" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Stude__1FCDBCEB" Association="Self.FK__StudentSe__Stude__1FCDBCEB">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentSection" EntitySet="StudentSection" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trainer__Account__15502E78" Association="Self.FK__Trainer__Account__15502E78">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Trainer" EntitySet="Trainer" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="FileSystemModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Account">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserType" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__Student__Account__1273C1CD" FromRole="Account" ToRole="Student" />
+          <NavigationProperty Name="Trainer" Relationship="Self.FK__Trainer__Account__15502E78" FromRole="Account" ToRole="Trainer" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MajorID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Major" Relationship="Self.FK__Courses__MajorID__1A14E395" FromRole="Courses" ToRole="Major" />
+          <NavigationProperty Name="Section" Relationship="Self.FK__Section__CourseI__1DE57479" FromRole="Courses" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SectionID" Type="Int32" Nullable="false" />
+          <Property Name="URL" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateAdded" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Section" Relationship="Self.FK__Files__SectionID__239E4DCF" FromRole="Files" ToRole="Section" />
+          <NavigationProperty Name="FileWho" Relationship="Self.FK__FileWho__FileID__25869641" FromRole="Files" ToRole="FileWho" />
+        </EntityType>
+        <EntityType Name="FileWho">
+          <Key>
+            <PropertyRef Name="FileID" />
+            <PropertyRef Name="StudentID" />
+          </Key>
+          <Property Name="FileID" Type="Int32" Nullable="false" />
+          <Property Name="StudentID" Type="Int32" Nullable="false" />
+          <Property Name="IsDownloaded" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Files" Relationship="Self.FK__FileWho__FileID__25869641" FromRole="FileWho" ToRole="Files" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__FileWho__Student__267ABA7A" FromRole="FileWho" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Major">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK__Courses__MajorID__1A14E395" FromRole="Major" ToRole="Courses" />
+        </EntityType>
+        <EntityType Name="Section">
+          <Key>
+            <PropertyRef Name="SectionID" />
+          </Key>
+          <Property Name="SectionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TrainerID" Type="Int32" Nullable="false" />
+          <Property Name="CourseID" Type="Int32" Nullable="false" />
+          <Property Name="DateFrom" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DateTo" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="TimeFrom" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="TimeTo" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Sunday" Type="Boolean" Nullable="false" />
+          <Property Name="Monday" Type="Boolean" Nullable="false" />
+          <Property Name="Tuesday" Type="Boolean" Nullable="false" />
+          <Property Name="Wednesday" Type="Boolean" Nullable="false" />
+          <Property Name="Thursday" Type="Boolean" Nullable="false" />
+          <Property Name="Friday" Type="Boolean" Nullable="false" />
+          <Property Name="Saturday" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="Self.FK__Section__CourseI__1DE57479" FromRole="Section" ToRole="Courses" />
+          <NavigationProperty Name="Files" Relationship="Self.FK__Files__SectionID__239E4DCF" FromRole="Section" ToRole="Files" />
+          <NavigationProperty Name="Trainer" Relationship="Self.FK__Section__Trainer__1CF15040" FromRole="Section" ToRole="Trainer" />
+          <NavigationProperty Name="StudentSection" Relationship="Self.FK__StudentSe__Secti__20C1E124" FromRole="Section" ToRole="StudentSection" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountID" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Student__Account__1273C1CD" FromRole="Student" ToRole="Account" />
+          <NavigationProperty Name="FileWho" Relationship="Self.FK__FileWho__Student__267ABA7A" FromRole="Student" ToRole="FileWho" />
+          <NavigationProperty Name="StudentSection" Relationship="Self.FK__StudentSe__Stude__1FCDBCEB" FromRole="Student" ToRole="StudentSection" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Trainer">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Specialist" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="AccountID" Type="Int32" />
+          <NavigationProperty Name="Account" Relationship="Self.FK__Trainer__Account__15502E78" FromRole="Trainer" ToRole="Account" />
+          <NavigationProperty Name="Section" Relationship="Self.FK__Section__Trainer__1CF15040" FromRole="Trainer" ToRole="Section" />
+        </EntityType>
+        <EntityType Name="StudentSection">
+          <Key>
+            <PropertyRef Name="StudenID" />
+            <PropertyRef Name="SectionID" />
+            <PropertyRef Name="FirstMark" />
+            <PropertyRef Name="SecondMark" />
+            <PropertyRef Name="ParticipantionMark" />
+            <PropertyRef Name="FinalMark" />
+          </Key>
+          <Property Name="StudenID" Type="Int32" Nullable="false" />
+          <Property Name="SectionID" Type="Int32" Nullable="false" />
+          <Property Name="FirstMark" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="SecondMark" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="ParticipantionMark" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <Property Name="FinalMark" Type="Decimal" Precision="4" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Section" Relationship="Self.FK__StudentSe__Secti__20C1E124" FromRole="StudentSection" ToRole="Section" />
+          <NavigationProperty Name="Student" Relationship="Self.FK__StudentSe__Stude__1FCDBCEB" FromRole="StudentSection" ToRole="Student" />
+        </EntityType>
+        <Association Name="FK__Student__Account__1273C1CD">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Student" Type="Self.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Trainer__Account__15502E78">
+          <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Account">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Trainer">
+              <PropertyRef Name="AccountID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Courses__MajorID__1A14E395">
+          <End Role="Major" Type="Self.Major" Multiplicity="1" />
+          <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Major">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Courses">
+              <PropertyRef Name="MajorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Section__CourseI__1DE57479">
+          <End Role="Courses" Type="Self.Courses" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="CourseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Files__SectionID__239E4DCF">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FileWho__FileID__25869641">
+          <End Role="Files" Type="Self.Files" Multiplicity="1" />
+          <End Role="FileWho" Type="Self.FileWho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Files">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FileWho">
+              <PropertyRef Name="FileID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__FileWho__Student__267ABA7A">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="FileWho" Type="Self.FileWho" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FileWho">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Section__Trainer__1CF15040">
+          <End Role="Trainer" Type="Self.Trainer" Multiplicity="1" />
+          <End Role="Section" Type="Self.Section" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Trainer">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Section">
+              <PropertyRef Name="TrainerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Secti__20C1E124">
+          <End Role="Section" Type="Self.Section" Multiplicity="1" />
+          <End Role="StudentSection" Type="Self.StudentSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Section">
+              <PropertyRef Name="SectionID" />
+            </Principal>
+            <Dependent Role="StudentSection">
+              <PropertyRef Name="SectionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__StudentSe__Stude__1FCDBCEB">
+          <End Role="Student" Type="Self.Student" Multiplicity="1" />
+          <End Role="StudentSection" Type="Self.StudentSection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="StudentSection">
+              <PropertyRef Name="StudenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="FileSystemEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Account" EntityType="Self.Account" />
+          <EntitySet Name="Courses" EntityType="Self.Courses" />
+          <EntitySet Name="Files" EntityType="Self.Files" />
+          <EntitySet Name="FileWho" EntityType="Self.FileWho" />
+          <EntitySet Name="Major" EntityType="Self.Major" />
+          <EntitySet Name="Section" EntityType="Self.Section" />
+          <EntitySet Name="Student" EntityType="Self.Student" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Trainer" EntityType="Self.Trainer" />
+          <EntitySet Name="StudentSection" EntityType="Self.StudentSection" />
+          <AssociationSet Name="FK__Student__Account__1273C1CD" Association="Self.FK__Student__Account__1273C1CD">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Trainer__Account__15502E78" Association="Self.FK__Trainer__Account__15502E78">
+            <End Role="Account" EntitySet="Account" />
+            <End Role="Trainer" EntitySet="Trainer" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Courses__MajorID__1A14E395" Association="Self.FK__Courses__MajorID__1A14E395">
+            <End Role="Major" EntitySet="Major" />
+            <End Role="Courses" EntitySet="Courses" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Section__CourseI__1DE57479" Association="Self.FK__Section__CourseI__1DE57479">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Files__SectionID__239E4DCF" Association="Self.FK__Files__SectionID__239E4DCF">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FileWho__FileID__25869641" Association="Self.FK__FileWho__FileID__25869641">
+            <End Role="Files" EntitySet="Files" />
+            <End Role="FileWho" EntitySet="FileWho" />
+          </AssociationSet>
+          <AssociationSet Name="FK__FileWho__Student__267ABA7A" Association="Self.FK__FileWho__Student__267ABA7A">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="FileWho" EntitySet="FileWho" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Section__Trainer__1CF15040" Association="Self.FK__Section__Trainer__1CF15040">
+            <End Role="Trainer" EntitySet="Trainer" />
+            <End Role="Section" EntitySet="Section" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Secti__20C1E124" Association="Self.FK__StudentSe__Secti__20C1E124">
+            <End Role="Section" EntitySet="Section" />
+            <End Role="StudentSection" EntitySet="StudentSection" />
+          </AssociationSet>
+          <AssociationSet Name="FK__StudentSe__Stude__1FCDBCEB" Association="Self.FK__StudentSe__Stude__1FCDBCEB">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentSection" EntitySet="StudentSection" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="FileSystemModelStoreContainer" CdmEntityContainer="FileSystemEntities">
+          <EntitySetMapping Name="Account">
+            <EntityTypeMapping TypeName="FileSystemModel.Account">
+              <MappingFragment StoreEntitySet="Account">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserType" ColumnName="UserType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="FileSystemModel.Courses">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MajorID" ColumnName="MajorID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="FileSystemModel.Files">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="URL" ColumnName="URL" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FileWho">
+            <EntityTypeMapping TypeName="FileSystemModel.FileWho">
+              <MappingFragment StoreEntitySet="FileWho">
+                <ScalarProperty Name="FileID" ColumnName="FileID" />
+                <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+                <ScalarProperty Name="IsDownloaded" ColumnName="IsDownloaded" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Major">
+            <EntityTypeMapping TypeName="FileSystemModel.Major">
+              <MappingFragment StoreEntitySet="Major">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Section">
+            <EntityTypeMapping TypeName="FileSystemModel.Section">
+              <MappingFragment StoreEntitySet="Section">
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="TrainerID" ColumnName="TrainerID" />
+                <ScalarProperty Name="CourseID" ColumnName="CourseID" />
+                <ScalarProperty Name="DateFrom" ColumnName="DateFrom" />
+                <ScalarProperty Name="DateTo" ColumnName="DateTo" />
+                <ScalarProperty Name="TimeFrom" ColumnName="TimeFrom" />
+                <ScalarProperty Name="TimeTo" ColumnName="TimeTo" />
+                <ScalarProperty Name="Sunday" ColumnName="Sunday" />
+                <ScalarProperty Name="Monday" ColumnName="Monday" />
+                <ScalarProperty Name="Tuesday" ColumnName="Tuesday" />
+                <ScalarProperty Name="Wednesday" ColumnName="Wednesday" />
+                <ScalarProperty Name="Thursday" ColumnName="Thursday" />
+                <ScalarProperty Name="Friday" ColumnName="Friday" />
+                <ScalarProperty Name="Saturday" ColumnName="Saturday" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student">
+            <EntityTypeMapping TypeName="FileSystemModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="FileSystemModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Trainer">
+            <EntityTypeMapping TypeName="FileSystemModel.Trainer">
+              <MappingFragment StoreEntitySet="Trainer">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Specialist" ColumnName="Specialist" />
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="StudentSection">
+            <EntityTypeMapping TypeName="FileSystemModel.StudentSection">
+              <MappingFragment StoreEntitySet="StudentSection">
+                <ScalarProperty Name="StudenID" ColumnName="StudenID" />
+                <ScalarProperty Name="SectionID" ColumnName="SectionID" />
+                <ScalarProperty Name="FirstMark" ColumnName="FirstMark" />
+                <ScalarProperty Name="SecondMark" ColumnName="SecondMark" />
+                <ScalarProperty Name="ParticipantionMark" ColumnName="ParticipantionMark" />
+                <ScalarProperty Name="FinalMark" ColumnName="FinalMark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
